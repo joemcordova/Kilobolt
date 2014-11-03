@@ -11,7 +11,7 @@ public class Animation {
 	private long totalDuration;
 
 	public Animation() {
-		frames = new ArrayList();
+		frames = new ArrayList<AnimFrame>();
 		totalDuration = 0;
 
 		synchronized (this) {
