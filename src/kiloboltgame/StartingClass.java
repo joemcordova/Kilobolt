@@ -18,7 +18,7 @@ import kiloboltgame.framework.Animation;
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	/**
-	 * 0.3.3 http://www.kilobolt.com/collision-detection-basics
+	 * 0.3.5 http://www.kilobolt.com/day-6-collision-detection-part-3.html
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -95,7 +95,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public void start() {
 		bg1 = new Background(0, 0);
 		bg2 = new Background(2160, 0);
-		
+
 		robot = new Robot();
 
 		// Initialize tiles
@@ -181,7 +181,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			bg2.update();
 			animate();
 			repaint();
-			
+
 			try {
 				Thread.sleep(17);
 			} catch (InterruptedException e) {
@@ -307,7 +307,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 		case KeyEvent.VK_SPACE:
 			break;
-			
+
 		case KeyEvent.VK_CONTROL:
 			robot.setReadyToFire(true);
 			break;
@@ -326,7 +326,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public static Background getBg2() {
 		return bg2;
 	}
-	
+
 	public static Robot getRobot() {
 		return robot;
 	}
