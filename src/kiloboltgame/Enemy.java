@@ -9,6 +9,8 @@ public class Enemy {
 
 	public Rectangle r = new Rectangle(0, 0, 0, 0);
 
+	public int health = 5;
+
 	// Behavioral Methods
 	public void update() {
 		centerX += speedX;
