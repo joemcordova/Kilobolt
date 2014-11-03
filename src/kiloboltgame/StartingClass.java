@@ -19,7 +19,7 @@ import kiloboltgame.framework.Animation;
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	/**
-	 * 0.3.7 http://www.kilobolt.com/day-8-basic-ai--final-touches.html
+	 * 0.3.8 http://www.kilobolt.com/day-1-introduction-to-android.html
 	 */
 	private static final long serialVersionUID = 1L;
 
