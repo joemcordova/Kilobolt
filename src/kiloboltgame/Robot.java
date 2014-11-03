@@ -8,7 +8,7 @@ public class Robot {
 	final int JUMPSPEED = -15;
 	final int MOVESPEED = 5;
 	final int GROUND = 382;
-	
+
 	private int centerX = 100;
 	private int centerY = GROUND;
 	private boolean jumped = false;
@@ -18,13 +18,12 @@ public class Robot {
 
 	private int speedX = 0;
 	private int speedY = 1;
-	
+
 	private Background bg1 = StartingClass.getBg1();
 	private Background bg2 = StartingClass.getBg2();
-	
+
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
-	
 	public void update() {
 		// Moves Character or Scrolls Background accordingly.
 
@@ -39,9 +38,9 @@ public class Robot {
 		if (centerX <= 200 && speedX > 0) {
 			centerX += speedX;
 		}
-		if (speedX > 0 && centerX > 200){
-			bg1.setSpeedX(-MOVESPEED);
-			bg2.setSpeedX(-MOVESPEED);
+		if (speedX > 0 && centerX > 200) {
+			bg1.setSpeedX(-MOVESPEED / 5);
+			bg2.setSpeedX(-MOVESPEED / 5);
 		}
 
 		// Updates Y Position
@@ -112,7 +111,7 @@ public class Robot {
 		}
 
 	}
-	
+
 	public void shoot() {
 		Projectile p = new Projectile(centerX + 50, centerY - 25);
 		projectiles.add(p);
