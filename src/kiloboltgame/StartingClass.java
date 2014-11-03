@@ -18,11 +18,11 @@ import kiloboltgame.framework.Animation;
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	/**
-	 * 0.3.2 http://www.kilobolt.com/day-3-level-creation---part-3
+	 * 0.3.3 http://www.kilobolt.com/collision-detection-basics
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Robot robot;
+	private static Robot robot;
 	private Heliboy hb, hb2;
 	private Image image, currentSprite, character, character2, character3,
 			characterDown, characterJumped, background, heliboy, heliboy2,
@@ -38,7 +38,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void init() {
-
 		setSize(800, 480);
 		setBackground(Color.BLACK);
 		setFocusable(true);
@@ -96,6 +95,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public void start() {
 		bg1 = new Background(0, 0);
 		bg2 = new Background(2160, 0);
+		
+		robot = new Robot();
 
 		// Initialize tiles
 		try {
@@ -106,7 +107,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 		hb = new Heliboy(340, 360);
 		hb2 = new Heliboy(700, 360);
-		robot = new Robot();
 
 		Thread thread = new Thread(this);
 		thread.start();
@@ -135,8 +135,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		for (int j = 0; j < 12; j++) {
 			String line = lines.get(j);
 			for (int i = 0; i < width; i++) {
-				System.out.println(i + "is i");
-				
 				if (i < line.length()) {
 					char ch = line.charAt(i);
 					Tile t = new Tile(i, j, Character.getNumericValue(ch));
@@ -181,9 +179,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			hb2.update();
 			bg1.update();
 			bg2.update();
-
 			animate();
 			repaint();
+			
 			try {
 				Thread.sleep(17);
 			} catch (InterruptedException e) {
@@ -281,6 +279,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		case KeyEvent.VK_CONTROL:
 			if (robot.isDucked() == false && robot.isJumped() == false) {
 				robot.shoot();
+				robot.setReadyToFire(false);
 			}
 			break;
 		}
@@ -308,6 +307,10 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 		case KeyEvent.VK_SPACE:
 			break;
+			
+		case KeyEvent.VK_CONTROL:
+			robot.setReadyToFire(true);
+			break;
 		}
 	}
 
@@ -322,5 +325,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	public static Background getBg2() {
 		return bg2;
+	}
+	
+	public static Robot getRobot() {
+		return robot;
 	}
 }

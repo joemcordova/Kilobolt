@@ -7,17 +7,17 @@ public class Robot {
 	// Constants are Here
 	final int JUMPSPEED = -15;
 	final int MOVESPEED = 5;
-	final int GROUND = 382;
 
 	private int centerX = 100;
-	private int centerY = GROUND;
+	private int centerY = 377;
 	private boolean jumped = false;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean ducked = false;
+	private boolean readyToFire = true;
 
 	private int speedX = 0;
-	private int speedY = 1;
+	private int speedY = 0;
 
 	private Background bg1 = StartingClass.getBg1();
 	private Background bg2 = StartingClass.getBg2();
@@ -45,20 +45,10 @@ public class Robot {
 
 		// Updates Y Position
 		centerY += speedY;
-		if (centerY + speedY >= GROUND) {
-			centerY = GROUND;
-		}
 
 		// Handles Jumping
 		if (jumped == true) {
 			speedY += 1;
-
-			if (centerY + speedY >= GROUND) {
-				centerY = GROUND;
-				speedY = 0;
-				jumped = false;
-			}
-
 		}
 
 		// Prevents going beyond X coordinate of 0
@@ -90,22 +80,22 @@ public class Robot {
 	}
 
 	private void stop() {
-		if (isMovingRight() == false && isMovingLeft() == false) {
+		if (!isMovingRight() && !isMovingLeft()) {
 			speedX = 0;
 		}
 
-		if (isMovingRight() == false && isMovingLeft() == true) {
+		if (!isMovingRight() && isMovingLeft()) {
 			moveLeft();
 		}
 
-		if (isMovingRight() == true && isMovingLeft() == false) {
+		if (isMovingRight()&& isMovingLeft()) {
 			moveRight();
 		}
 
 	}
 
 	public void jump() {
-		if (jumped == false) {
+		if (!jumped) {
 			speedY = JUMPSPEED;
 			jumped = true;
 		}
@@ -113,8 +103,10 @@ public class Robot {
 	}
 
 	public void shoot() {
-		Projectile p = new Projectile(centerX + 50, centerY - 25);
-		projectiles.add(p);
+		if (readyToFire) {
+		    Projectile p = new Projectile(centerX + 50, centerY - 25);
+		    projectiles.add(p);
+		}
 	}
 
 	public int getCenterX() {
@@ -185,4 +177,11 @@ public class Robot {
 		return projectiles;
 	}
 
+	public boolean isReadyToFire() {
+		return readyToFire;
+	}
+
+	public void setReadyToFire(boolean readyToFire) {
+		this.readyToFire = readyToFire;
+	}
 }
